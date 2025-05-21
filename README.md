@@ -11,7 +11,7 @@
 
 ```bash
 git clone https://github.com/alise-fox/alicesmaps1.git
-cd your-app
+cd alicesmaps1
 ```
 
 ### Node ≥ 18
