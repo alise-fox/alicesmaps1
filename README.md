@@ -16,16 +16,16 @@ cd your-app
 
 ### Node ≥ 18
 ```bash
-npm install          # или yarn / pnpm
+npm install
 ```
 ### Устанавливаем Expo CLI (глобально или через npx)
 ```bash
-npm install -g expo-cli      # одноразово
+npm install -g expo-cli
 ```
 
 ### Запускаем проект
 ```bash
-npx expo start        # откроется dev-сервер Metro
+npx expo start
 ```
 
 | Платформа         | Действие                                                                                        |
