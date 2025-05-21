@@ -10,7 +10,7 @@
 ### Клонируем репозиторий и ставим зависимости
 
 ```bash
-git clone https://github.com/your-org/your-app.git
+git clone https://github.com/alise-fox/alicesmaps1.git
 cd your-app
 ```
 
