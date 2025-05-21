@@ -1,50 +1,55 @@
-# Welcome to your Expo app 👋
+# alicesmaps — Задание 1
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Небольшое Expo-приложение на React Native, которое показывает полноэкранную карту, позволяет долгим нажатием добавлять метки, просматривать их детали и прикреплять изображения.  
+Код строго типизирован TypeScript-интерфейсами.
 
-## Get started
+---
 
-1. Install dependencies
+## Быстрый старт
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### Клонируем репозиторий и ставим зависимости
 
 ```bash
-npm run reset-project
+git clone https://github.com/your-org/your-app.git
+cd your-app
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Node ≥ 18
+```bash
+npm install          # или yarn / pnpm
+```
+### Устанавливаем Expo CLI (глобально или через npx)
+```bash
+npm install -g expo-cli      # одноразово
+```
 
-## Learn more
+### Запускаем проект
+```bash
+npx expo start        # откроется dev-сервер Metro
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+| Платформа         | Действие                                                                                        |
+| ----------------- | ----------------------------------------------------------------------------------------------- |
+| **iOS / Android** | «Run on device» в Dev Tools или «a / i» в терминале (эмулятор)                              |
+| **Expo Go**       | Сканируем QR-код приложением Expo Go на телефоне                                            |
+| **Web**           | `w` в терминале (не забудьте, что `react-native-maps` на Web не поддержан — карта будет скрыта) |
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+#### Android SDK / Xcode не обязательны, если запускаете на реальном устройстве через Expo Go.
 
-## Join the community
+### Кратко о реализации
+| Задача              | Решение                                                                        |
+| ------------------- | ------------------------------------------------------------------------------ |
+| Полноэкранная карта | `react-native-maps` → `<MapView style={{flex:1}}>`                             |
+| Добавление маркера  | `onLongPress` у карты создаёт объект `MarkerData`                              |
+| Переход к деталям   | `expo-router` (`router.push('/marker/123')`) — динамический сегмент `[id].tsx` |
+| Список картинок     | Компонент `ImageList` с горизонтальным `FlatList`                              |
+| Выбор фото          | `expo-image-picker`                                                            |
+| Хранение состояния  | **React Context** → `MarkersContext` (никаких внешних зависимостей)            |
+| Типы                | `types.ts` — `MarkerData`, `MarkerImage`, `RootStackParamList`                 |
+| Обработка ошибок    | `try / catch` + `Alert.alert` для Image Picker и навигации                     |
 
-Join our community of developers creating universal apps.
+### Дополнительные реализованные функции
+* Глобальный контекст - сохранение маркеров при переходе между экранами.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Известные ограничения
+* Данные не сохраняются между перезапусками приложения — контекст живёт только в RAM.
